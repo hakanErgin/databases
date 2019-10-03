@@ -66,7 +66,7 @@ app.delete('/', (req, res) => {
   })
 });
 
-app.patch('/tagTodoItem', (req, res) => {
+app.post('/tagTodoItem', (req, res) => {
   const itemId = 'parse the id from the request';
   const tagId = 'parse the id from the request';
   connectedModel.tagTodoItem(itemId, tagId, (err, result) => {
@@ -80,7 +80,7 @@ app.patch('/tagTodoItem', (req, res) => {
   })
 });
 
-app.patch('/untagTodoItem', (req, res) => {
+app.delete('/untagTodoItem', (req, res) => {
   const itemId = 'parse the id from the request';
   const tagId = 'parse the id from the request';
   connectedModel.untagTodoItem(itemId, tagId, (err, result) => {
