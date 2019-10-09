@@ -39,7 +39,7 @@ app.post('/', (req, res) => {
       console.error(err);
     } else {
       console.log('create successful');
-      res.send('created');
+      res.send(id + ' created');
     }
   })
 });
@@ -53,20 +53,20 @@ app.patch('/', (req, res) => {
       // send a helpful error response!
     } else {
       console.log('update successful');
-      res.send(result);
+      res.send(id + ' updated');
     }
   })
 });
 
 app.delete('/', (req, res) => {
-  const id = 'parse the id from the request';
+  const id = req.body.id;
   connectedModel.delete(id, (err, result) => {
     if (err) {
       console.error(err);
       // send a helpful error response!
     } else {
       console.log('delete successful');
-      res.send(result);
+      res.send(id + ' deleted');
     }
   })
 });

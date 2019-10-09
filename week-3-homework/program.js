@@ -48,16 +48,26 @@ class TodoModel {
 
   update(id, description, callback) {
     // Write code and query to update and existing TODO item
-
-    // placeholder to make sure your routes are working
-    callback(null, { id, description })
+    const updateTodo = `UPDATE todo_items SET text = '${description}' WHERE id = ${id}`;
+    this.dbConnection.query(updateTodo, function (err, results, fields) {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, results);
+    })
   }
 
   delete(id, callback) {
     // Write code and query to delete an existing TODO item
-
-    // placeholder to make sure your routes are working
-    callback(null, { id })
+    const deleteTodo = `DELETE FROM todo_items WHERE id = ${id}`;
+    this.dbConnection.query(deleteTodo, function (err, results, fields) {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, results);
+    })
   }
 
   tagTodoItem(todoItemId, tagId, callback) {
