@@ -10,38 +10,43 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.send({ msg: 'hellow!' });
+  connectedModel.load((err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(result);
+    }
+  });
 })
 
 app.get('/:id', (req, res) => {
-  const id = 'parse the description from the request';
+  const id = req.params.id;
   connectedModel.read(id, (err, result) => {
     if (err) {
       console.error(err);
-      // send a helpful error response!
     } else {
-      console.log('create successful');
+      console.log('read by id successful');
       res.send(result);
     }
   })
 });
 
 app.post('/', (req, res) => {
-  const description = 'parse the description from the request';
-  connectedModel.create(description, (err, result) => {
+  const description = req.body.description;
+  const userId = req.body.id;
+  connectedModel.create(description, userId, (err) => {
     if (err) {
       console.error(err);
-      // send a helpful error response!
     } else {
       console.log('create successful');
-      res.send(result);
+      res.send('created');
     }
   })
 });
 
 app.patch('/', (req, res) => {
-  const id = 'parse the id from the request';
-  const description = 'parse the description from the request';
+  const id = req.body.id;
+  const description = req.body.description;
   connectedModel.update(id, description, (err, result) => {
     if (err) {
       console.error(err);
