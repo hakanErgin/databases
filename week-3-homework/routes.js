@@ -27,7 +27,7 @@ app.get('/:id', (req, res) => {
       console.error(err);
       console.log(err);
     } else {
-      console.log('read by id');
+      console.log(result + 'aa');
       res.send(result);
     }
   })
@@ -42,7 +42,7 @@ app.post('/', (req, res) => {
       console.log(err);
     } else {
       console.log('create');
-      res.send('created');
+      res.send(result);
     }
   })
 });

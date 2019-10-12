@@ -11,12 +11,11 @@ class TodoModel {
   // Loads all the TODOs in the database
   load(callback) {
     const selectTodoItems = "SELECT * FROM todo_items";
-    this.dbConnection.query(selectTodoItems, function (err, results, fields) {
+    this.dbConnection.query(selectTodoItems, function (err, results, ) {
       if (err) {
         callback(err);
         return;
       }
-
       callback(null, results);
     });
   }
@@ -24,7 +23,7 @@ class TodoModel {
   read(id, callback) {
     // Write code and query to return TODO by id
     const selectById = "SELECT * FROM todo_items where id = " + id;
-    this.dbConnection.query(selectById, function (err, results, fields) {
+    this.dbConnection.query(selectById, function (err, results) {
       if (err) {
         callback(err);
         return;
@@ -36,7 +35,7 @@ class TodoModel {
   create(description, userId, callback) {
     // Write code and query to create a new TODO item
     const createTodo = `INSERT INTO todo_items (text, user_id) VALUES ('${description}', '${userId}')`;
-    this.dbConnection.query(createTodo, function (err, results, fields) {
+    this.dbConnection.query(createTodo, function (err, results) {
       if (err) {
         callback(err);
         return;
@@ -48,7 +47,7 @@ class TodoModel {
   update(id, description, callback) {
     // Write code and query to update and existing TODO item
     const updateTodo = `UPDATE todo_items SET text = '${description}' WHERE id = ${id}`;
-    this.dbConnection.query(updateTodo, function (err, results, fields) {
+    this.dbConnection.query(updateTodo, function (err, results) {
       if (err) {
         callback(err);
         return;
@@ -60,7 +59,7 @@ class TodoModel {
   delete(id, callback) {
     // Write code and query to delete an existing TODO item
     const deleteTodo = `DELETE FROM todo_items WHERE id = ${id}`;
-    this.dbConnection.query(deleteTodo, function (err, results, fields) {
+    this.dbConnection.query(deleteTodo, function (err, results) {
       if (err) {
         callback(err);
         return;
@@ -72,7 +71,7 @@ class TodoModel {
   tagTodoItem(itemId, tagId, callback) {
     // Write code and query add a tag to a TODO item
     const tagItem = `INSERT INTO todo_item_tag(todo_item_id, tag_id) VALUES('${itemId}', '${tagId}')`;
-    this.dbConnection.query(tagItem, function (err, results, fields) {
+    this.dbConnection.query(tagItem, function (err, results) {
       if (err) {
         callback(err);
         return;
@@ -84,7 +83,7 @@ class TodoModel {
   untagTodoItem(itemId, tagId, callback) {
     // Write code and query remove a tag from a TODO item
     const untagItem = `DELETE FROM todo_item_tag WHERE todo_item_id='${itemId}' AND tag_id = '${tagId}'`;
-    this.dbConnection.query(untagItem, function (err, results, fields) {
+    this.dbConnection.query(untagItem, function (err, results) {
       if (err) {
         callback(err);
         return;
@@ -96,7 +95,7 @@ class TodoModel {
   markCompleted(itemId, callback) {
     // Write code to mark a TODO item as completed
     const markAsComplete = `UPDATE todo_items SET is_completed = 1 WHERE id = '${itemId}'`;
-    this.dbConnection.query(markAsComplete, function (err, results, fields) {
+    this.dbConnection.query(markAsComplete, function (err, results) {
       if (err) {
         callback(err);
         return;
@@ -120,15 +119,6 @@ dbConnection.connect(function (err) {
   }
 
   console.log('connected as id ' + dbConnection.threadId);
-
-  // const todoModel = new TodoModel(dbConnection);
-  // todoModel.load(function (err, todoItems) {
-  //   if (err) {
-  //     console.log("error loading TODO items:", err);
-  //   }
-
-  //   console.log("existing todo items:", todoItems);
-  // });
 });
 
 const connectedModel = new TodoModel(dbConnection);
