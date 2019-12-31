@@ -1,3 +1,5 @@
+_This repo is for studying purposes._
+
 > Open [the DataBases wiki](https://github.com/HackYourFutureBelgium/databases/wiki) to find the lesson plans, slides, prep work and more info on the homeworks
 
 # Databases
